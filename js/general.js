@@ -2,8 +2,8 @@ $(document).ready(function(){
 
     //BUSCADOR
     var seccion = $('#tablaActual').val();
-    llenarTablas(seccion);
-    
+    // llenarTablas(seccion);
+    console.log(seccion);
 
     $("#searchBox").on("keyup", function() {
     var value = $(this).val().toLowerCase();
@@ -12,19 +12,16 @@ $(document).ready(function(){
     });
     });
 
-    // switch (seccion){
-    //     case 'formatos':
-    //         llenarTablas(seccion);
-    //         break;
-    //     default:
-    //         llenarTablas(seccion);
-    //         break;
-    // }
+    if (seccion === 'nuevoDocumento'){
+        nuevoDocumento();
+    }else{
+        llenarTablas(seccion);
+    }
 
     function llenarTablas(seccion = ''){
         var accion  = 'consulta1',
             seccion = seccion;
-        console.log('DESDE FUNCION ' + seccion);
+        // console.log('DESDE FUNCION ' + seccion);
         var Informacion = new FormData();
         Informacion.append('accion', accion);
         Informacion.append('seccion', seccion);
@@ -33,21 +30,12 @@ $(document).ready(function(){
         xmlhr.onload = function(){
             if (this.status === 200) {
             var respuesta = JSON.parse(xmlhr.responseText);
-              console.log(respuesta);
+            // console.log(respuesta);
             if (respuesta.status === 'OK') {
                 var informacion = respuesta.data;
                 for(var i in informacion){
                     tablaInformacion(informacion[i]);
                 }
-                // if (seccion === 'formatos'){
-                //     for(var i in informacion){
-                //         tablaInformacion2(informacion[i]);
-                //     }     
-                // }else{
-                //     for(var i in informacion){
-                //         tablaInformacion(informacion[i]);
-                //     }
-                // }
             } else if(respuesta.status === 'error'){
                 var informacion = respuesta.data;
             }
@@ -78,6 +66,32 @@ $(document).ready(function(){
                         + "<a tabindex='2' class='btn btn-sm btn-info btnAdjuntar' data-id='"+rowInfo.id+"' role='button' title='Adjuntar'><i class='fas fa-paperclip'></i></a>"
                         + "<a tabindex='3' class='btn btn-sm btn-danger ml-1 btnEliminar' data-id='"+rowInfo.id+"' role='button' title='Eliminar registro'><i class='fas fa-trash-alt'></i></a>"
                         + "</td>"));
+    }
+
+
+    $('#btn-nuevo').click(function(){
+        console.log('NUEVO DOCUMENTO ' + seccion);
+        var url = "index.php?request=nuevoDocumento&seccion=subir-"+seccion;
+        localStorage.setItem('seccion', seccion); //GUARADAR CODIGO DE LA SECCION EN LA MEMORIA LOCAL DEL NAVEGADOR
+        $(location).attr('href',url);
+    });
+
+    function nuevoDocumento()
+    {
+        var seccion = localStorage.getItem('seccion'),
+            titulo = ''; //OBTENER EL CODIGO DEL EQUIPO DE LA MEMORIA LOCAL DEL NAVEGADOR
+        localStorage.removeItem('seccion'); //ELIMINAR EL CODIGO DEL EQUIPO DE LA MEMORIA LOCAL DEL NAVEGADOR
+        console.log('El Nuevo ' + seccion);
+        if(seccion === 'macs')
+            titulo = 'nuevo manual de calidad (MAC)';
+        else if(seccion === 'pacs')
+            titulo = 'nuevo procedimiento de calidad (PAC)';
+        else if(seccion === 'its')
+            titulo = 'nueva instruccion de calidad (ITS)';
+        else if(seccion === 'formatos')
+            titulo = 'nuevo formato de calidad';
+        $(".tituloNuevo").text(titulo);
+        $(".tituloNuevo").text(titulo);
     }
 
 });
