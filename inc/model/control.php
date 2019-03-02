@@ -19,6 +19,9 @@
             );
             echo json_encode($respuesta);    
             break;
+        case 'guardar-formato':
+            die(json_encode($_POST));
+            break;
         case 'salir':
             // die(json_encode($_POST));
             session_start();

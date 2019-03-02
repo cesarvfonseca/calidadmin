@@ -80,7 +80,6 @@ $(document).ready(function(){
     {
         var seccion = localStorage.getItem('seccion'),
             titulo = ''; //OBTENER EL CODIGO DEL EQUIPO DE LA MEMORIA LOCAL DEL NAVEGADOR
-        localStorage.removeItem('seccion'); //ELIMINAR EL CODIGO DEL EQUIPO DE LA MEMORIA LOCAL DEL NAVEGADOR
         console.log('El Nuevo ' + seccion);
         if(seccion === 'macs')
             titulo = 'nuevo manual de calidad (MAC)';
@@ -93,5 +92,68 @@ $(document).ready(function(){
         $(".tituloNuevo").text(titulo);
         $(".tituloNuevo").text(titulo);
     }
+    
+    $('#btn-guardar').click(function(){
+        var seccion = localStorage.getItem('seccion'),
+        accion  = 'guardar-formato';
+        // localStorage.removeItem('seccion'); //ELIMINAR EL CODIGO DEL EQUIPO DE LA MEMORIA LOCAL DEL NAVEGADOR
+        console.log('GUARDAR ' + seccion);
+        //OBTENER LO VALORES DEL FORMULARIO
+        var campo1 = document.getElementById('ipCampo1').value,
+            campo2 = document.getElementById('ipCampo2').value,
+            campo3 = document.getElementById('ipCampo3').value,
+            campo4 = document.getElementById('ipCampo4').value,
+            campo5 = document.getElementById('ipCampo5'),
+            formatoPDF = campo5.files[0];//OBTENER EL ARCHIVO ADJUNTO
+
+        console.log(campo1 + ' ' + campo2 + ' ' + campo3 + ' ' + campo4 );
+
+        if(campo1.trim() === '' || campo2.trim() === '' || campo3.trim() === '' || campo4.trim() === ''){
+            swal({
+                type: 'error',
+                title: 'Error!',
+                text: 'Todos los campos son obligatorios!'
+            })
+        }else{
+            var datosFormato = new FormData();
+                datosFormato.append('accion', accion);
+                datosFormato.append('campo1', campo1);
+                datosFormato.append('campo2', campo2);
+                datosFormato.append('campo3', campo3);
+                datosFormato.append('campo4', campo4);
+                datosFormato.append('campo5', formatoPDF);
+                var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'inc/model/control.php', true);
+            xhr.onload = function(){
+                if (this.status === 200 && this.readyState === XMLHttpRequest.DONE) {
+                    var respuesta = JSON.parse(xhr.responseText);
+                    console.log(respuesta);
+                    // if (respuesta.estado === 'OK') {
+                    //     var destination = respuesta.log;
+                    //     swal({
+                    //             title: 'Guardado exitoso!',
+                    //             text: 'Guardado de la información exitoso!',
+                    //             type: 'success'
+                    //         })
+                    //         .then(resultado => {
+                    //                 if(resultado.value) {
+                    //                     location.reload();
+                    //                     window.location.href = 'index.php?request='+destination;
+                    //                 }
+                    //             })
+                    // } else {
+                    //     // Hubo un error
+                    //     swal({
+                    //         title: 'Error!',
+                    //         text: 'Hubo un error',
+                    //         type: 'error'
+                    //     })
+                    // }
+                }
+            }
+            xhr.send(datosFormato);
+        }
+    });
+
 
 });

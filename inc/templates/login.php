@@ -3,7 +3,7 @@
     <div class="col-md-6 offset-md-3">
         <div class="section">
             <div class="card">
-                <img class="card-img-top" src="https://images.pexels.com/photos/60504/security-protection-anti-virus-software-60504.jpeg?auto=compress&cs=tinysrgb&h=350" height="400" width="250" alt="Card image cap">
+                <img class="card-img-top" src="https://images.pexels.com/photos/357514/pexels-photo-357514.jpeg?cs=srgb&dl=batch-books-document-357514.jpg&fm=jpg" height="400" width="250" alt="Card image cap">
                 <div class="card-body">
                 <form id="loginForm">
                     <div class="form-group">
