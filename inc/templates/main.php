@@ -5,6 +5,11 @@
     switch ($seccion)
     {
         case 'main-page':
+            $titulo = 'Página Administración SAC';
+            $tabla = '';
+            $id = 2;
+            break;
+        case 'macs':
             $titulo = 'Manuales de calidad';
             $tabla = 'macs';
             $id = 1;
@@ -27,6 +32,11 @@
         case 'nuevoDocumento':
             $titulo = 'Nuevo formato';
             $tabla = 'nuevoDocumento';
+            $id = 2;
+            break;
+        case 'editarDocumento':
+            $titulo = 'Editar formato';
+            $tabla = 'editarDocumento';
             $id = 2;
             break;
         default:
@@ -70,6 +80,12 @@
     {
         case 'nuevoDocumento':
             include 'MODULOS/nuevo-documento.php';
+            break;
+        case 'editarDocumento':
+            include 'MODULOS/editar-documento.php';
+            break;
+        case 'main-page':
+            include 'SECCION1/main-view.php';
             break;
         default:
             include 'SECCION1/tabla.php';

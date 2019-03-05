@@ -116,11 +116,12 @@ function iniciarSesion(e){
 
 function asignarSesion( id, name, depto ){
     var u_nombre = name,
-        u_activo = id;
+        u_id =  id,
+        u_depto = depto;
     $.ajax({
         url: 'inc/model/crear_sesion.php',
         type: 'GET',
-        data: 'id=' + u_activo + '&name=' + u_nombre + '&depto_id=' + depto,
+        data: 'id=' + u_id + '&name=' + u_nombre + '&depto_id=' + u_depto,
         error: function(xhr, status, error) {
             alert("error");
         }

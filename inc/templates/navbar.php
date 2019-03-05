@@ -15,7 +15,8 @@
   <form class="form-inline">
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-item nav-link menuLink" href="index.php?request=main-page">MAC'S <span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link menuLink" href="index.php?request=main-page"><i class="fas fa-home"></i><span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link menuLink" href="index.php?request=macs">MAC'S</a>
         <a class="nav-item nav-link" href="index.php?request=pacs">PAC'S</a>
         <a class="nav-item nav-link" href="index.php?request=its">ITS</a>
         <a class="nav-item nav-link" href="index.php?request=formatos">FORMATOS</a>
