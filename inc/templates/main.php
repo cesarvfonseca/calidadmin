@@ -1,11 +1,12 @@
-
 <?php  
+    $url = $_GET['tittle'];
+    echo $url;
     $seccion = $_REQUEST['request'];
 
     switch ($seccion)
     {
         case 'main-page':
-            $titulo = 'Página Administración SAC';
+            $titulo = 'Página Admin.istración SAC';
             $tabla = '';
             $id = 2;
             break;
